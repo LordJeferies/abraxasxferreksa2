@@ -13,7 +13,14 @@ git add index.html 404.html styles.css app.js experiencia.js config.js assets ro
 if ! git diff --cached --quiet; then git -c user.name='LordJeferies' -c user.email='285246965+LordJeferies@users.noreply.github.com' commit -m 'Publicar landing FerreKsa'; fi
 if git remote get-url origin >/dev/null 2>&1; then
  REMOTE="$(git remote get-url origin)"
- case "$REMOTE" in 'https://github.com/LordJeferies/abraxasxferreksa2.git'|'git@github.com:LordJeferies/abraxasxferreksa2.git') ;; *) echo 'El repositorio local apunta a otro destino. Revisa origin antes de publicar.'; exit 1;; esac
+ case "$REMOTE" in 'https://github.com/LordJeferies/abraxasxferreksa2.git'|'git@github.com:LordJeferies/abraxasxferreksa2.git') ;; 'https://github.com/LordJeferies/abraxasxferreksa.git'|'git@github.com:LordJeferies/abraxasxferreksa.git')
+ if git remote get-url respaldo-original >/dev/null 2>&1; then
+  git remote set-url origin https://github.com/LordJeferies/abraxasxferreksa2.git
+ else
+  git remote rename origin respaldo-original
+  git remote add origin https://github.com/LordJeferies/abraxasxferreksa2.git
+ fi
+ ;; *) echo 'El repositorio local apunta a un destino desconocido. Revisa origin antes de publicar.'; exit 1;; esac
 else
  git remote add origin https://github.com/LordJeferies/abraxasxferreksa2.git
 fi
