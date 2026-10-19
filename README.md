@@ -18,3 +18,7 @@ Landing: https://www.figma.com/design/IBSrbil70Ga1zjWFEPGxCH?node-id=1-2
 Temporal: https://www.figma.com/design/IBSrbil70Ga1zjWFEPGxCH?node-id=79-314
 La conexión Figma se recuperó y se sincronizaron las imágenes y los diseños. Los efectos de cursor y desplazamiento se ejecutan en la web; los enlaces de Figma muestran el diseño editable.
 Backup con WhatsApp sencillo: https://www.figma.com/design/IBSrbil70Ga1zjWFEPGxCH?node-id=86-400
+
+
+## Revisión visual final
+La portada usa una imagen integrada para conservar perspectiva, piso y sombras. Se retiró la composición por capas del personaje. El logo frontal se entrega como PNG transparente. Los locales y horarios se transcribieron de las capturas facilitadas por el usuario. Los enlaces Maps son búsquedas por nombre y dirección, no coordenadas verificadas.

@@ -9,7 +9,7 @@ if ! gh repo view LordJeferies/abraxasxferreksa2 >/dev/null 2>&1; then
  gh repo create LordJeferies/abraxasxferreksa2 --public --description 'FerreKsa: herramientas, materiales y cotizaciones'
 fi
 if [ ! -d .git ]; then git init -b main; fi
-git add index.html 404.html styles.css app.js experiencia.js config.js assets robots.txt sitemap.xml .nojekyll README.md publicar.command
+git add index.html 404.html styles.css sedes.css app.js experiencia.js config.js assets robots.txt sitemap.xml .nojekyll README.md publicar.command
 if ! git diff --cached --quiet; then git -c user.name='LordJeferies' -c user.email='285246965+LordJeferies@users.noreply.github.com' commit -m 'Publicar landing FerreKsa'; fi
 if git remote get-url origin >/dev/null 2>&1; then
  REMOTE="$(git remote get-url origin)"
