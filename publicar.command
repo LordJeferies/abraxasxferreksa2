@@ -24,8 +24,7 @@ if git remote get-url origin >/dev/null 2>&1; then
 else
  git remote add origin https://github.com/LordJeferies/abraxasxferreksa2.git
 fi
-gh auth setup-git
-git push -u origin HEAD:main
+git -c credential.helper= -c 'credential.https://github.com.helper=!gh auth git-credential' push -u origin HEAD:main
 if ! gh api repos/LordJeferies/abraxasxferreksa2/pages >/dev/null 2>&1; then
  printf '%s\n' '{"build_type":"legacy","source":{"branch":"main","path":"/"}}' | gh api --method POST repos/LordJeferies/abraxasxferreksa2/pages --input -
 else
