@@ -22,3 +22,8 @@
 body.quote-active .floating-whatsapp,body.quote-active .whatsapp-float,body.quote-active .mobile-quote,body.quote-active #back-top{visibility:hidden;pointer-events:none}
 
 body:has(#quote-form:focus-within) .floating-whatsapp,body:has(#quote-form:focus-within) .mobile-quote,body:has(#quote-form:focus-within) #back-top{visibility:hidden;pointer-events:none}
+
+/* Depth camera: stationary focal plane, eased environment and overscan. */
+.parallax-layer{transform:translate3d(var(--parallax-x,0px),var(--parallax-y,0px),0);will-change:auto}.parallax-layer.depth-moving{will-change:transform}.hero-mascot{transform:none!important;will-change:auto;filter:drop-shadow(0 8px 7px #0005)}.project-banner>img.parallax-layer{height:calc(100% + 64px);top:-32px}.depth-toggle{position:absolute;z-index:5;right:7%;bottom:18px;color:#d4dde4;border:1px solid #ffffff35;border-radius:20px;background:#101a2ab8;padding:9px 13px;font:11px Inter,sans-serif;min-height:36px;cursor:pointer}.depth-toggle:focus-visible{outline:3px solid #ffe500;outline-offset:3px}@media(max-width:760px){.depth-toggle{display:none}.parallax-layer{transform:none!important}.hero-mascot{filter:drop-shadow(0 6px 6px #0005)}}
+
+.carousel-bar .depth-toggle{position:static;margin-left:auto;margin-right:14px}@media(max-width:760px){.carousel-bar .depth-toggle{display:none}}

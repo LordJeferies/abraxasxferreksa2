@@ -3,26 +3,19 @@
  const $ = s => document.querySelector(s);
  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
  const wide = matchMedia('(min-width: 900px)');
- const layers = [...document.querySelectorAll('.parallax-layer')];
- let frame = null;
- function draw() {
-  frame = null;
-  const enabled = wide.matches && !reduced.matches && !document.hidden;
-  for (const layer of layers) {
-   const section = layer.closest('section');
-   if (!enabled || layer.closest('[hidden]')) { layer.style.setProperty('--parallax-y', '0px'); continue; }
-   const rect = section.getBoundingClientRect();
-   if (rect.bottom < 0 || rect.top > innerHeight) continue;
-   const progress = Math.max(-500, Math.min(700, -rect.top));
-   const offset = Math.max(-45, Math.min(45, progress * Number(layer.dataset.depth)));
-   layer.style.setProperty('--parallax-y', `${offset.toFixed(2)}px`);
-  }
+ // The character remains on the focal plane; only the environment carries depth.
+ const layers=[...document.querySelectorAll('.parallax-layer')].filter(el=>!el.classList.contains('hero-mascot')).map(el=>({el,x:0,y:0}));
+ let frame=0,last=0,px=0,py=0,depthPaused=false;
+ const depthButton=document.querySelector('#depth-toggle');
+ function draw(now){frame=0;const enabled=wide.matches&&!reduced.matches&&!document.hidden&&!depthPaused;const dt=last?Math.min(48,now-last):16;last=now;const ease=enabled?1-Math.exp(-dt/90):1;let moving=false;
+  for(const layer of layers){const section=layer.el.closest('section'),rect=section.getBoundingClientRect();let tx=0,ty=0;if(enabled&&!layer.el.closest('[hidden]')&&rect.bottom>0&&rect.top<innerHeight){const progress=Math.max(-1,Math.min(1,-rect.top/Math.max(rect.height,1)));ty=progress*20+(section.classList.contains('hero')?-py*3:0);tx=section.classList.contains('hero')?-px*6:0;}layer.x+=(tx-layer.x)*ease;layer.y+=(ty-layer.y)*ease;layer.el.style.setProperty('--parallax-x',layer.x.toFixed(3)+'px');layer.el.style.setProperty('--parallax-y',layer.y.toFixed(3)+'px');if(Math.abs(tx-layer.x)+Math.abs(ty-layer.y)>.025)moving=true;layer.el.classList.toggle('depth-moving',moving);}
+  if(moving)frame=requestAnimationFrame(draw);else last=0;
  }
- function queue() { if (frame === null) frame = requestAnimationFrame(draw); }
- addEventListener('scroll', queue, {passive:true});
- addEventListener('resize', queue, {passive:true});
- reduced.addEventListener('change', queue);wide.addEventListener('change', queue);
- document.addEventListener('visibilitychange', queue);queue();
+ function queue(){if(!frame&&!document.hidden)frame=requestAnimationFrame(draw);}
+ addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue,{passive:true});
+ const hero=document.querySelector('.hero');hero.addEventListener('pointermove',e=>{if(e.pointerType==='touch'||reduced.matches||!wide.matches)return;const rect=hero.getBoundingClientRect();px=(e.clientX-rect.left)/rect.width*2-1;py=(e.clientY-rect.top)/rect.height*2-1;queue();},{passive:true});hero.addEventListener('pointerleave',()=>{px=py=0;queue();});
+ function syncDepth(){if(depthButton){depthButton.disabled=reduced.matches;depthButton.textContent=reduced.matches?'Movimiento reducido':depthPaused?'Activar profundidad':'Pausar profundidad';depthButton.setAttribute('aria-pressed',String(depthPaused||reduced.matches));}queue();}
+ if(depthButton)depthButton.addEventListener('click',()=>{depthPaused=!depthPaused;syncDepth();});reduced.addEventListener('change',syncDepth);wide.addEventListener('change',queue);document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;last=0;}else queue();});syncDepth();
  const slider = $('#comparison-range');
  function compare(value) {
   const v=Math.max(0,Math.min(100,Number(value)));
