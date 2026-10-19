@@ -5,25 +5,25 @@ command -v gh >/dev/null || { echo 'Instala GitHub CLI desde https://cli.github.
 if ! gh auth status >/dev/null 2>&1; then gh auth login --hostname github.com --web --git-protocol https; fi
 LOGIN="$(gh api user --jq .login)"
 if [ "$LOGIN" != 'LordJeferies' ]; then echo 'Inicia sesión en GitHub CLI como LordJeferies y vuelve a ejecutar este archivo.'; exit 1; fi
-if ! gh repo view LordJeferies/abraxasxferreksa >/dev/null 2>&1; then
- gh repo create LordJeferies/abraxasxferreksa --public --description 'FerreKsa: herramientas, materiales y cotizaciones'
+if ! gh repo view LordJeferies/abraxasxferreksa2 >/dev/null 2>&1; then
+ gh repo create LordJeferies/abraxasxferreksa2 --public --description 'FerreKsa: herramientas, materiales y cotizaciones'
 fi
 if [ ! -d .git ]; then git init -b main; fi
-git add index.html 404.html styles.css app.js config.js assets robots.txt sitemap.xml .nojekyll README.md publicar.command
+git add index.html 404.html styles.css app.js experiencia.js config.js assets robots.txt sitemap.xml .nojekyll README.md publicar.command
 if ! git diff --cached --quiet; then git -c user.name='LordJeferies' -c user.email='285246965+LordJeferies@users.noreply.github.com' commit -m 'Publicar landing FerreKsa'; fi
 if git remote get-url origin >/dev/null 2>&1; then
  REMOTE="$(git remote get-url origin)"
- case "$REMOTE" in 'https://github.com/LordJeferies/abraxasxferreksa.git'|'git@github.com:LordJeferies/abraxasxferreksa.git') ;; *) echo 'El repositorio local apunta a otro destino. Revisa origin antes de publicar.'; exit 1;; esac
+ case "$REMOTE" in 'https://github.com/LordJeferies/abraxasxferreksa2.git'|'git@github.com:LordJeferies/abraxasxferreksa2.git') ;; *) echo 'El repositorio local apunta a otro destino. Revisa origin antes de publicar.'; exit 1;; esac
 else
- git remote add origin https://github.com/LordJeferies/abraxasxferreksa.git
+ git remote add origin https://github.com/LordJeferies/abraxasxferreksa2.git
 fi
 gh auth setup-git
 git push -u origin HEAD:main
-if ! gh api repos/LordJeferies/abraxasxferreksa/pages >/dev/null 2>&1; then
- printf '%s\n' '{"build_type":"legacy","source":{"branch":"main","path":"/"}}' | gh api --method POST repos/LordJeferies/abraxasxferreksa/pages --input -
+if ! gh api repos/LordJeferies/abraxasxferreksa2/pages >/dev/null 2>&1; then
+ printf '%s\n' '{"build_type":"legacy","source":{"branch":"main","path":"/"}}' | gh api --method POST repos/LordJeferies/abraxasxferreksa2/pages --input -
 else
- printf '%s\n' '{"build_type":"legacy","source":{"branch":"main","path":"/"}}' | gh api --method PUT repos/LordJeferies/abraxasxferreksa/pages --input -
+ printf '%s\n' '{"build_type":"legacy","source":{"branch":"main","path":"/"}}' | gh api --method PUT repos/LordJeferies/abraxasxferreksa2/pages --input -
 fi
 echo 'GitHub Pages configurado. La publicación puede tardar unos minutos.'
 echo 'Comprueba el despliegue en GitHub > Settings > Pages.'
-echo 'URL prevista: https://lordjeferies.github.io/abraxasxferreksa/'
+echo 'URL prevista: https://lordjeferies.github.io/abraxasxferreksa2/'
