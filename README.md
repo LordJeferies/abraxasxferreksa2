@@ -22,3 +22,6 @@ Backup con WhatsApp sencillo: https://www.figma.com/design/IBSrbil70Ga1zjWFEPGxC
 
 ## Revisión visual final
 La portada usa una imagen integrada para conservar perspectiva, piso y sombras. Se retiró la composición por capas del personaje. El logo frontal se entrega como PNG transparente. Los locales y horarios se transcribieron de las capturas facilitadas por el usuario. Los enlaces Maps son búsquedas por nombre y dirección, no coordenadas verificadas.
+
+## Ampliación PDF / hogar
+20 referencias para consultar, incluidas TV y electrodomésticos. Cotizador visual 2D en #medidas, lista editable y WhatsApp; no importa Three.js/WebGL. Seis ideas de hogar, tres guías completas y páginas informativas en informacion.html. Promociones, marcas, testimonios e iniciativas sociales requieren contenido verificado. Véase docs/ALCANCE-PDF.md. Respaldo anterior en el workspace work/backups/ferreksa2-antes-pdf-2026-10-19.tar.gz.
