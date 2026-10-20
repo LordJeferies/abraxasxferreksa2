@@ -25,3 +25,6 @@ La portada usa una imagen integrada para conservar perspectiva, piso y sombras. 
 
 ## Ampliación PDF / hogar
 20 referencias para consultar, incluidas TV y electrodomésticos. Cotizador visual 2D en #medidas, lista editable y WhatsApp; no importa Three.js/WebGL. Seis ideas de hogar, tres guías completas y páginas informativas en informacion.html. Promociones, marcas, testimonios e iniciativas sociales requieren contenido verificado. Véase docs/ALCANCE-PDF.md. Respaldo anterior en el workspace work/backups/ferreksa2-antes-pdf-2026-10-19.tar.gz.
+
+## Reorganización del 20 de octubre
+La landing está en abraxasxferreksa; el sitio completo, en abraxasxferreksa2; la demo con 3D, en abraxasxferreksa9; y la temporal, en abraxasxferreksa0. Las cuatro incluyen tema claro/oscuro. Cotizaciones usa búsqueda, categorías y plantillas editables. Véase docs/REORGANIZACION-20261020.md para alcance y pruebas.
